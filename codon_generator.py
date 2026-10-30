@@ -155,3 +155,13 @@ if start_codon in codons:
     print(' - '.join(orf_amino_acids))
 else:
     print('No ORF found because the start codon is absent.')
+
+# Accept RNA sequence from the user
+print('RNA Sequence Input (Optional)')
+rna_sequence = input('Enter an RNA sequence, or press Enter to skip: ').upper()
+
+if rna_sequence:
+    if set(rna_sequence).issubset(set('AUGC')):
+        print('Valid RNA sequence.')
+    else:
+        print('Invalid RNA sequence. Use only A, U, G, and C.')
