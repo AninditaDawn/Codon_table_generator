@@ -101,3 +101,15 @@ codons = [dna_sequence[i:i+3] for i in range(0, len(dna_sequence), 3)]
 print("\nCodons:")
 print(" - ".join(codons))
 
+
+# Handle incomplete codons
+if len(dna_sequence) % 3 != 0:
+    incomplete_bases = len(dna_sequence) % 3
+
+    print("\nWarning: Incomplete codon at the end of the sequence.")
+    print("Incomplete bases:", dna_sequence[-incomplete_bases:])
+
+    codons = codons[:-1]
+
+print("\nComplete codons:", codons)
+
