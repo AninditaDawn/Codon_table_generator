@@ -137,3 +137,21 @@ if found_stop_codons:
     print('Stop codons identified:', ', '.join(found_stop_codons))
 else:
     print('No stop codons found.')
+
+
+# Identify and translate an open reading frame (ORF)
+if start_codon in codons:
+    start_index = codons.index(start_codon)
+    orf_amino_acids = []
+
+    for codon in codons[start_index:]:
+        amino_acid = codon_table[codon]
+        orf_amino_acids.append(amino_acid)
+
+        if codon in stop_codons:
+            break
+
+    print('ORF Translation:')
+    print(' - '.join(orf_amino_acids))
+else:
+    print('No ORF found because the start codon is absent.')
