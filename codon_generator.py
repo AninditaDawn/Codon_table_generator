@@ -59,3 +59,13 @@ for codon, amino_acid in codon_table.items():
     print(codon, ":", amino_acid)
 
 print("\nTotal codons:", len(codon_table))
+
+# Define start and stop codons
+
+start_codon = "ATG"
+
+stop_codons = ["TAA", "TAG", "TGA"]
+
+print("\nStart Codon:", start_codon)
+print("Stop Codons:", stop_codons)
+
