@@ -1,15 +1,10 @@
-# ============================================
 # Project: Codon Table Generator
 # Description: DNA and RNA sequence translation
 # using the standard genetic code.
-# ============================================
 
-print("===================================")
 print("       CODON TABLE GENERATOR")
-print("===================================")
 
 print("Welcome to the Codon Table Generator!")
-
 
 # Standard Genetic Code Dictionary
 
