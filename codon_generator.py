@@ -113,3 +113,14 @@ if len(dna_sequence) % 3 != 0:
 
 print("\nComplete codons:", codons)
 
+
+# Translate codons into amino acids
+amino_acid_sequence = []
+
+for codon in codons:
+    amino_acid = codon_table[codon]
+    amino_acid_sequence.append(amino_acid)
+
+print("\nTranslated Amino Acid Sequence:")
+print(" - ".join(amino_acid_sequence))
+
