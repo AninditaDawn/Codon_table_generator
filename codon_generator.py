@@ -69,3 +69,12 @@ stop_codons = ["TAA", "TAG", "TGA"]
 print("\nStart Codon:", start_codon)
 print("Stop Codons:", stop_codons)
 
+
+# Accept DNA sequence from the user
+
+print("\nDNA Sequence Input")
+
+dna_sequence = input("Enter your DNA sequence: ")
+
+print("\nYour entered DNA sequence is:", dna_sequence)
+
