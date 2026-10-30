@@ -85,8 +85,12 @@ print("\nStandardized DNA Sequence:", dna_sequence)
 # Validate DNA sequence
 valid_bases = set("ATGC")
 
-if set(dna_sequence).issubset(valid_bases) and dna_sequence != "":
-    print("Valid DNA sequence.")
+if dna_sequence == "":
+    print("Error: DNA sequence cannot be empty.")
+
+elif not set(dna_sequence).issubset(valid_bases):
+    print("Error: Invalid DNA sequence. Use only A, T, G, and C.")
+
 else:
-    print("Invalid DNA sequence. Use only A, T, G, and C.")
+    print("Valid DNA sequence.")
 
