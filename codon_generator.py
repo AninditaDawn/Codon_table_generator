@@ -2,12 +2,12 @@
 # Description: DNA and RNA sequence translation
 # using the standard genetic code.
 
-print("       CODON TABLE GENERATOR")
+print("CODON TABLE GENERATOR")
 
 print("Welcome to the Codon Table Generator!")
 
 # Standard Genetic Code Dictionary
-
+# creating the codon table
 codon_table = {
     "TTT": "Phenylalanine", "TTC": "Phenylalanine",
     "TTA": "Leucine", "TTG": "Leucine",
