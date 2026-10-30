@@ -81,3 +81,12 @@ print("\nYour entered DNA sequence is:", dna_sequence)
 # Convert DNA sequence to uppercase
 dna_sequence = dna_sequence.upper()
 print("\nStandardized DNA Sequence:", dna_sequence)
+
+# Validate DNA sequence
+valid_bases = set("ATGC")
+
+if set(dna_sequence).issubset(valid_bases) and dna_sequence != "":
+    print("Valid DNA sequence.")
+else:
+    print("Invalid DNA sequence. Use only A, T, G, and C.")
+
