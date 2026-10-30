@@ -82,10 +82,11 @@ print("\nYour entered DNA sequence is:", dna_sequence)
 dna_sequence = dna_sequence.upper()
 print("\nStandardized DNA Sequence:", dna_sequence)
 
+
 # Validate DNA sequence
 valid_bases = set("ATGC")
 
-if dna_sequence == "":
+if not dna_sequence:
     print("Error: DNA sequence cannot be empty.")
 
 elif not set(dna_sequence).issubset(valid_bases):
@@ -94,74 +95,92 @@ elif not set(dna_sequence).issubset(valid_bases):
 else:
     print("Valid DNA sequence.")
 
+    # Divide DNA sequence into codons
+    codons = [dna_sequence[i:i+3] for i in range(0, len(dna_sequence), 3)]
 
-# Divide DNA sequence into codons
-codons = [dna_sequence[i:i+3] for i in range(0, len(dna_sequence), 3)]
+    # Handle incomplete codons
+    if len(dna_sequence) % 3 != 0:
+        incomplete_bases = len(dna_sequence) % 3
+        print("Incomplete bases:", dna_sequence[-incomplete_bases:])
+        codons = codons[:-1]
 
-print("\nCodons:")
-print(" - ".join(codons))
+    print("\nComplete codons:", codons)
 
+    # Translate codons
+    amino_acid_sequence = []
 
-# Handle incomplete codons
-if len(dna_sequence) % 3 != 0:
-    incomplete_bases = len(dna_sequence) % 3
+    for codon in codons:
+        amino_acid_sequence.append(codon_table[codon])
 
-    print("\nWarning: Incomplete codon at the end of the sequence.")
-    print("Incomplete bases:", dna_sequence[-incomplete_bases:])
+    print("\nTranslated Amino Acid Sequence:")
+    print(" - ".join(amino_acid_sequence))
 
-    codons = codons[:-1]
+    # Identify start and stop codons
+    if start_codon in codons:
+        print("Start codon ATG identified.")
+    else:
+        print("Start codon ATG not found.")
 
-print("\nComplete codons:", codons)
+    found_stop_codons = [codon for codon in codons if codon in stop_codons]
 
+    print("Stop codons identified:", found_stop_codons)
 
-# Translate codons into amino acids
-amino_acid_sequence = []
+    # Identify and translate ORF
+    if start_codon in codons:
+        start_index = codons.index(start_codon)
+        orf_amino_acids = []
 
-for codon in codons:
-    amino_acid = codon_table[codon]
-    amino_acid_sequence.append(amino_acid)
+        for codon in codons[start_index:]:
+            orf_amino_acids.append(codon_table[codon])
 
-print("\nTranslated Amino Acid Sequence:")
-print(" - ".join(amino_acid_sequence))
+            if codon in stop_codons:
+                break
 
+        print("\nORF Translation:")
+        print(" - ".join(orf_amino_acids))
+    else:
+        print("No ORF found because the start codon is absent.")
 
-# Identify start and stop codons
-if start_codon in codons:
-    print('Start codon ATG identified in the sequence.')
-else:
-    print('Start codon ATG not found.')
-
-found_stop_codons = [codon for codon in codons if codon in stop_codons]
-
-if found_stop_codons:
-    print('Stop codons identified:', ', '.join(found_stop_codons))
-else:
-    print('No stop codons found.')
-
-
-# Identify and translate an open reading frame (ORF)
-if start_codon in codons:
-    start_index = codons.index(start_codon)
-    orf_amino_acids = []
-
-    for codon in codons[start_index:]:
-        amino_acid = codon_table[codon]
-        orf_amino_acids.append(amino_acid)
-
-        if codon in stop_codons:
-            break
-
-    print('ORF Translation:')
-    print(' - '.join(orf_amino_acids))
-else:
-    print('No ORF found because the start codon is absent.')
 
 # Accept RNA sequence from the user
-print('RNA Sequence Input (Optional)')
-rna_sequence = input('Enter an RNA sequence, or press Enter to skip: ').upper()
+print("\nRNA Sequence Input")
+rna_sequence = input("Enter your RNA sequence, or press Enter to skip: ").upper()
 
+# Validate and translate RNA sequence
 if rna_sequence:
-    if set(rna_sequence).issubset(set('AUGC')):
-        print('Valid RNA sequence.')
+    if set(rna_sequence).issubset(set("AUGC")):
+        print("Valid RNA sequence.")
+
+        converted_dna = rna_sequence.replace("U", "T")
+        print("Equivalent DNA sequence:", converted_dna)
+
+        # Divide RNA sequence into codons
+        rna_codons = [
+            rna_sequence[i:i+3]
+            for i in range(0, len(rna_sequence), 3)
+        ]
+
+        # Handle incomplete RNA codons
+        if len(rna_sequence) % 3 != 0:
+            incomplete_rna_bases = len(rna_sequence) % 3
+            print("Incomplete RNA bases:", rna_sequence[-incomplete_rna_bases:])
+            rna_codons = rna_codons[:-1]
+
+        print("RNA Codons:", " - ".join(rna_codons))
+
+        # Translate RNA codons
+        rna_amino_acids = []
+
+        for codon in rna_codons:
+            dna_codon = codon.replace("U", "T")
+            rna_amino_acids.append(codon_table[dna_codon])
+
+        print("\nRNA Translated Amino Acid Sequence:")
+        print(" - ".join(rna_amino_acids))
+
     else:
-        print('Invalid RNA sequence. Use only A, U, G, and C.')
+        print("Invalid RNA sequence. Use only A, U, G, and C.")
+
+else:
+    print("RNA input skipped.")
+
