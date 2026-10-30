@@ -78,3 +78,6 @@ dna_sequence = input("Enter your DNA sequence: ")
 
 print("\nYour entered DNA sequence is:", dna_sequence)
 
+# Convert DNA sequence to uppercase
+dna_sequence = dna_sequence.upper()
+print("\nStandardized DNA Sequence:", dna_sequence)
