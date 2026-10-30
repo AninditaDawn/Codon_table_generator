@@ -94,3 +94,10 @@ elif not set(dna_sequence).issubset(valid_bases):
 else:
     print("Valid DNA sequence.")
 
+
+# Divide DNA sequence into codons
+codons = [dna_sequence[i:i+3] for i in range(0, len(dna_sequence), 3)]
+
+print("\nCodons:")
+print(" - ".join(codons))
+
