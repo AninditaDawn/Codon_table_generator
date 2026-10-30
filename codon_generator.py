@@ -124,3 +124,16 @@ for codon in codons:
 print("\nTranslated Amino Acid Sequence:")
 print(" - ".join(amino_acid_sequence))
 
+
+# Identify start and stop codons
+if start_codon in codons:
+    print('Start codon ATG identified in the sequence.')
+else:
+    print('Start codon ATG not found.')
+
+found_stop_codons = [codon for codon in codons if codon in stop_codons]
+
+if found_stop_codons:
+    print('Stop codons identified:', ', '.join(found_stop_codons))
+else:
+    print('No stop codons found.')
